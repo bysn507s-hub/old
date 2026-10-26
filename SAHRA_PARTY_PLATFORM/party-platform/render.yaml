@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: sahra-party
+    runtime: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    disk:
+      name: sahra-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DATABASE_FILE
+        value: /var/data/party.sqlite
+      - key: PUBLIC_URL
+        sync: false
